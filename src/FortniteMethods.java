@@ -117,14 +117,12 @@ public class FortniteMethods {
 	
 	public static void runXP(Robot r)
 			throws AWTException, InterruptedException, IOException, NumberFormatException, TesseractException {
-		//System.out.println("NIGGER");
 
-		// Action.escape(r);
 		escape(r); // @TODO fix for news screen
 		errorMsg(); // error on screen
-		//clickPlay(r);
 
-				clickLobby();
+		clickLobby();
+						
 		if (mainMenu()) {
 			
 			getPlayerInfo();
@@ -137,21 +135,28 @@ public class FortniteMethods {
 
 		}
 
-		//if (inGame()) {
-		//	System.out.println("Detected: In a game");
-			//IngameAI AI = new IngameAI();
-		//}
+		if (inGame()) {
+			//System.out.println("Detected: In a game");
+			new IngameAI();
+		}
 		danceIngame(r);
 		clickReturn(r);
 		log();
 		leaveBattlePassGUI();
 
-/*		if(!mainMenu() && !battlePassLevelGUI() && !inGame()) {
+		if(!mainMenu() && !battlePassLevelGUI() && !inGame()) {
 			isFortniteCrashed();
+		}
+		 continueButton();
+
+	/*	if (inGame()) {
+			System.out.println("Detected: In a game");
+			new IngameAI();
+			
+		}else {
+			System.out.println("Detected:Not In a game");
 		}*/
-//		 continueButton();
-
-
+		
 	}
 
 	private static void continueButton() throws AWTException, IOException {
@@ -309,8 +314,7 @@ public class FortniteMethods {
 	}
 
 	public static boolean inGame() throws AWTException {
-		if (inGameRadar() || inGameHealth() || pingVisible()) { // FIXME
-			// if(CheckColor.compareToScreen("wood.png")) {
+		if (inGameRadar() || inGameHealth() || pingVisible() || CheckColor.check(new Coordinate(2000,1005), Color.white)) { // FIXME
 			setActivity("In game, earning XP");
 			return true;
 		}

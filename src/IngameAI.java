@@ -8,6 +8,7 @@ import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -22,10 +23,10 @@ public class IngameAI extends Main {
 
 	int x1, y1, x2, y2;
 	int yx, xy, yx2, xy2;
-
+	int i = 0;
 	int turnSpeed = 20;
 	static int experience = 0;
-	double sensitivity = 0.14;
+	double sensitivity = 0.10;
 	double fortniteYaw = 0.55550;
 	int playerStuckCounter = 0;
 	static double bpLevel = -1;
@@ -63,7 +64,7 @@ public class IngameAI extends Main {
 
 		writeRadar();
 		// print(/*x1 + ", " + y1 + ", " + */x2 + ", " + y2);
-		noobRun();
+		//noobRun();
 
 	}
 
@@ -286,20 +287,38 @@ public class IngameAI extends Main {
 
 	}
 
-	private void writeRadar() throws AWTException {
+	private void writeRadar() throws AWTException, InterruptedException {
 		Robot r = new Robot();
+
 		int radarX = 2265, radarY = 14, radarSize = 280;
-		BufferedImage img2 = r.createScreenCapture(new Rectangle(0, 0, (int) Swidth, (int) Sheight));
-		BufferedImage radarImg = img2.getSubimage(2265, 14, 280, 280);
-		// BufferedImage radarImg = r.createScreenCapture(new Rectangle(radarX, radarY,
-		// radarSize, radarSize));
+		//BufferedImage img2 = r.createScreenCapture(new Rectangle(0, 0, (int) Swidth, (int) Sheight));
+		//BufferedImage radarImg = img2.getSubimage(2265, 14, 280, 280);
+		BufferedImage radarImg = r.createScreenCapture(new Rectangle(radarX, radarY,radarSize, radarSize));
 
 		File radar = new File(directoryTemp + "radar.png");
 		File radarOld = new File(directoryTemp + "radarOld.png");
 		boolean exists = radar.exists();
 		boolean oldExists = radarOld.exists();
 
+		
+	/*//Testing radar stitching
 		try {
+			Date date = new Date();
+			
+			ImageIO.write(radarImg, "png", new File(directoryTemp + "radar\\" + System.nanoTime() + ".temp"));
+
+			System.out.println(System.nanoTime());
+			Thread.sleep(1000);
+		
+		} catch (IOException e) {
+			System.out.println("something went wrong with trying to write a radar picture");
+			e.printStackTrace();
+
+		}
+		*/
+		
+			
+		 try {
 			if (!exists && !oldExists) {
 				ImageIO.write(radarImg, "png", new File(directoryTemp + "radar.png"));
 				print("1 Written radar.png to folder");
@@ -327,6 +346,8 @@ public class IngameAI extends Main {
 			e.printStackTrace();
 
 		}
+		
+		
 	}
 
 	private boolean isPlayerStuck() throws AWTException, IOException {
