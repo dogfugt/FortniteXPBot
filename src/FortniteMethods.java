@@ -118,10 +118,10 @@ public class FortniteMethods {
 	public static void runXP(Robot r)
 			throws AWTException, InterruptedException, IOException, NumberFormatException, TesseractException {
 
-		escape(r); // @TODO fix for news screen
-		errorMsg(); // error on screen
+		//escape(r); // @TODO fix for news screen
+	//	errorMsg(); // error on screen
 
-		clickLobby();
+		//clickLobby();
 						
 		if (mainMenu()) {
 			
@@ -139,8 +139,8 @@ public class FortniteMethods {
 			//System.out.println("Detected: In a game");
 			new IngameAI();
 		}
-		danceIngame(r);
-		clickReturn(r);
+	//	danceIngame(r);
+	//	clickReturn(r);
 		log();
 		leaveBattlePassGUI();
 
@@ -447,7 +447,8 @@ public class FortniteMethods {
 
 					Main.print(date.toString() + " | Started a new game! " /* + "\n" */);
 //					Action.left(playCoord);
-					Action.left(playCoord.getX() + 50, playCoord.getY() + 15);
+				//	Action.left(playCoord.getX() + 50, playCoord.getY() + 15);
+					Action.left(2500, 980);
 					r.delay(100);
 
 					//r.mouseMove((int) Swidth / 2, (int) Sheight / 2);
